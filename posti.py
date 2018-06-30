@@ -33,7 +33,7 @@ def main(argv):
 
     for arg in argv:
         get_state(arg, args.lista)
-        if args.lista:
+        if args.lista and len(args.koodi) > 1:
             print ""
         
 if __name__ == "__main__":
