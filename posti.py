@@ -10,6 +10,8 @@ def get_event(event, code):
     location = unicode(event['locationName']).encode('utf8')
     timestamp = datetime.strptime(event['timestamp'], "%Y-%m-%dT%H:%M:%SZ")
     new_hour = timestamp.hour + time.timezone / -3600 + 1
+    if new_hour > 23:
+        new_hour -= 24
     timestamp = timestamp.replace(hour=new_hour)
     print "{0}: {1} {2}, {3}".format(code, desc, timestamp, location)
 
