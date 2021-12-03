@@ -1,6 +1,8 @@
 # posti.py
 Hakee viimeisimmän tapahtuman Postin seurantakoodilla. Koodeja voi olla myös useampi peräkkäin.
 
+Testattu Python3 versiolla 3.9.1
+
 Käyttö:
 ```
 usage: posti.py [-h] [-l] koodi [koodi ...]
@@ -29,6 +31,4 @@ optional arguments:
 <seurantakoodi1>: Lähetys ei ole vielä saapunut Postille, odotathan 2018-06-29 09:34:13, HELSINKI
 
 <seurantakoodi2>: Lähetys ei ole vielä saapunut Postille, odotathan 2018-06-30 08:32:11, HELSINKI
-```
-
 ```

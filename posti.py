@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright (c) 2018 Sami Vänttinen <sami.vanttinen@protonmail.com>
+# Copyright (c) 2018 Sami Vänttinen 
+# Updated and ported to Python3 by Akseli Kasteenpohja
 
 import argparse, json, requests, sys, time
 from datetime import datetime
 
 def get_event(event, code):
-    desc = unicode(event['description']['fi']).encode('utf8')
-    location = unicode(event['locationName']).encode('utf8')
+    desc = str(event['description']['fi'])
+    location = str(event['locationName'])
     timestamp = datetime.strptime(event['timestamp'], "%Y-%m-%dT%H:%M:%SZ")
     new_hour = timestamp.hour + time.timezone / -3600 + 1
     if new_hour > 23:
         new_hour -= 24
-    timestamp = timestamp.replace(hour=new_hour)
-    print "{0}: {1} {2}, {3}".format(code, desc, timestamp, location)
+    print(timestamp)
+    print("{0}: {1} {2} UTC, {3}".format(code, desc, timestamp, location))
 
 def get_state(code, multiple):
     req = requests.get("https://www.posti.fi/henkiloasiakkaat/seuranta/api/shipments/" + code)
@@ -24,8 +25,8 @@ def get_state(code, multiple):
                 get_event(event, code)
                 if multiple == False:
                     break
-        else:
-            print "Virheellinen seurantakoodi."
+    else:
+        print("Virheellinen seurantakoodi.")
 
 def main(argv):
     parser = argparse.ArgumentParser()
@@ -36,7 +37,7 @@ def main(argv):
     for arg in argv:
         get_state(arg, args.lista)
         if args.lista and len(args.koodi) > 1:
-            print ""
+            print("")
         
 if __name__ == "__main__":
     main(sys.argv[1:])
